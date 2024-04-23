@@ -41,3 +41,14 @@ public class BookController {
     }
 
 }
+
+/*
+ * Sample JSON request to create a book:
+ * 
+ * {
+ * "title": "The Great Gatsby",
+ * "author": "F. Scott Fitzgerald",
+ * "isbn": "9780743273565",
+ * "publishedYear": "1925"
+ * }
+ */
