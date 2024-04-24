@@ -1,5 +1,6 @@
 package com.crud.crud.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,12 +55,32 @@ public class BookController {
         return bookService.deleteBook(bookId);
     }
 
+    @GetMapping("/author/{authorName}")
+    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String authorName) {
+        List<Book> books = bookService.getBooksByAuthor(authorName);
+        if (books.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    @PostMapping("/bulk")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Book> addBooks(@RequestBody List<Book> books) {
+        List<Book> addedBooks = new ArrayList<>();
+        for (Book book : books) {
+            addedBooks.add(bookService.addBook(book));
+        }
+        return addedBooks;
+    }
+
 }
 
 /*
  * Sample JSON request to create a book:
  * 
  * {
+ * "id":"uuid.hex",
  * "title": "The Great Gatsby",
  * "author": "F. Scott Fitzgerald",
  * "isbn": "9780743273565",

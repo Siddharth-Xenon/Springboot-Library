@@ -57,6 +57,10 @@ public class BookService {
         return ResponseEntity.ok(updatedBookDetails);
     }
 
+    public List<Book> getBooksByAuthor(String authorName) {
+        return repository.findByAuthor(authorName);
+    }
+
     public ResponseEntity<Map<String, String>> deleteBook(String id) {
         Book book = repository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Book not found with id " + id));
