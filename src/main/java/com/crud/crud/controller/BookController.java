@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crud.crud.models.Book;
 import com.crud.crud.service.BookService;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +33,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book addBook(@RequestBody Book book) {
+    public Book addBook(@RequestBody @Valid Book book) {
         return bookService.addBook(book);
     }
 
