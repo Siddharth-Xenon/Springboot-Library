@@ -2,6 +2,7 @@ package com.crud.crud.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +15,11 @@ import lombok.NoArgsConstructor;
 public class Author {
     @Id
     private String id;
+
+    @NotBlank(message = "Name is mandatory")
     private String name;
-    private String biography;
+
+    private String biography; // Biography is optional
 
     // Getters and Setters
     public String getId() {

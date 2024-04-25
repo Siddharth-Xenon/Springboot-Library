@@ -2,6 +2,10 @@ package com.crud.crud.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,13 +15,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Book {
     @Id
     private String id;
+
+    @NotBlank(message = "Title is mandatory")
     private String title;
+
+    @NotBlank(message = "Author is mandatory")
     private String author;
+
+    @NotBlank(message = "ISBN is mandatory")
+    @Pattern(regexp = "^(?:ISBN(?:-13)?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$", message = "Invalid ISBN format")
     private String isbn;
+
+    @NotNull(message = "Publication year is mandatory")
+    @Min(value = 1450, message = "Publication year must be no earlier than 1450")
     private int publicationYear;
 
     // Getters and Setters

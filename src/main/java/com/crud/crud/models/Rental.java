@@ -2,6 +2,8 @@ package com.crud.crud.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +16,19 @@ import lombok.NoArgsConstructor;
 public class Rental {
     @Id
     private String id;
+
+    @NotBlank(message = "Book ID is mandatory")
     private String bookId;
+
+    @NotBlank(message = "Renter name is mandatory")
     private String renterName;
+
+    @NotBlank(message = "Rental date is mandatory")
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Rental date must be in the format YYYY-MM-DD")
     private String rentalDate;
+
+    @NotBlank(message = "Return date is mandatory")
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Return date must be in the format YYYY-MM-DD")
     private String returnDate;
 
     // Getters and Setters
